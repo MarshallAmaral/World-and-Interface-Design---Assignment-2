@@ -5,6 +5,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5;
     [SerializeField] private Camera gameCam;
+    [SerializeField] private GameObject ClickHighlight;
 
     private Animator anim;
     private Rigidbody2D rb;
@@ -44,6 +45,9 @@ public class Player : MonoBehaviour
         {
             targetPos = gameCam.ScreenToWorldPoint(Mouse.current.position.ReadValue());
             isMoving = true;
+
+            GameObject highlight = Instantiate(ClickHighlight, targetPos, Quaternion.identity);
+            Destroy(highlight, 0.5f);
         }
     }
 }

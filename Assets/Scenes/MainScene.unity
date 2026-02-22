@@ -315,6 +315,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Player
   moveSpeed: 5
   gameCam: {fileID: 1508792704}
+  ClickHighlight: {fileID: 6394306274902317541, guid: ad1bf056824234f4aaa38a86c524dacf, type: 3}
 --- !u!114 &378313947
 MonoBehaviour:
   m_ObjectHideFlags: 0
