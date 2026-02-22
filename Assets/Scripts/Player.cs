@@ -47,7 +47,7 @@ public class Player : MonoBehaviour
             isMoving = true;
 
             GameObject highlight = Instantiate(ClickHighlight, targetPos, Quaternion.identity);
-            Destroy(highlight, 0.5f);
+            Destroy(highlight, 0.7f);
         }
     }
 }
