@@ -18,14 +18,14 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    private void Update()
+    private void Update() // Handle animation and sprite flipping
     {
         anim.SetFloat("Velocity", Mathf.Abs(rb.linearVelocity.x));
 
         transform.localScale = new Vector3(Mathf.Sign(rb.linearVelocity.x), transform.localScale.y, 1);
     }
 
-    private void FixedUpdate()
+    private void FixedUpdate() // Handle movement
     {
         if (isMoving)
         {
@@ -41,13 +41,27 @@ public class Player : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed) // Only trigger on the initial click, not while holding
         {
-            targetPos = gameCam.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-            isMoving = true;
+            Vector3 mousePos = gameCam.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+            mousePos.z = 0f;
 
-            GameObject highlight = Instantiate(ClickHighlight, targetPos, Quaternion.identity);
-            Destroy(highlight, 0.7f);
+            RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
+
+            if (hit.collider != null && hit.collider.CompareTag("Enemy"))
+            {
+                // This will damage the enemy and deal 5 damage 
+                hit.collider.GetComponent<Enemy>().TakeDamage(5);
+            }
+            else
+            {
+                // Moves player
+                targetPos = mousePos;
+                isMoving = true;
+
+                GameObject highlight = Instantiate(ClickHighlight, mousePos, Quaternion.identity);
+                Destroy(highlight, 0.7f);
+            }
         }
     }
 }
