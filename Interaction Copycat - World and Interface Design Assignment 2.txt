@@ -1,0 +1,24 @@
+Interaction Copycat
+World and Interface Design GAME-1007
+Marshall Amaral - Lucas Kirby - Connor Breau
+February 23, 2026
+
+The Interaction we decided to do was 2D mouse click/move character movement. The game we are going to be copying this mechanic from is League of Legends. 
+Describe its relevance to you, and to the community at large:
+The reason we picked this mechanic is that it’s a well-known game with an iconic mechanic that is used widely across various games. The point-and-click movement is used in many games and is the starting point for many new developers who want an easy yet effective way to move around. 
+
+Acknowledgements:
+Player character – Lucas Kirby
+Point click movement – Lucas Kirby
+Circle indicator – Marshall Amaral
+Enemies – Marshall Amaral
+Camera Follow – Marshall Amaral
+Map – Connor Breau
+
+Apart from using A* pathfinding from arongranberg.com. All features added were our own work done from things we learned in programming class, and exploring with Unity from our main project game. 
+
+
+
+
+
+
