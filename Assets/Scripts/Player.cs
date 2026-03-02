@@ -1,3 +1,4 @@
+using Pathfinding;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,29 +12,32 @@ public class Player : MonoBehaviour
     private Rigidbody2D rb;
     private bool isMoving;
     private Vector2 targetPos;
+    private AIPath path;
 
     private void Awake()
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        path = GetComponent<AIPath>();
     }
 
     private void Update() // Handle animation and sprite flipping
     {
-        anim.SetFloat("Velocity", Mathf.Abs(rb.linearVelocity.x));
+        anim.SetBool("Moving", isMoving);
 
-        transform.localScale = new Vector3(Mathf.Sign(rb.linearVelocity.x), transform.localScale.y, 1);
+        transform.localScale = new(Mathf.Sign(targetPos.x - transform.position.x), transform.localScale.y, 1);
     }
 
     private void FixedUpdate() // Handle movement
     {
         if (isMoving)
         {
-            Vector2 direction = (targetPos - (Vector2)transform.position).normalized;
-            rb.linearVelocity = direction * moveSpeed;
+            path.maxSpeed = moveSpeed;
+            // move the player
+            path.destination = targetPos;
             if (Vector2.Distance(transform.position, targetPos) < 0.1f)
             {
-                rb.linearVelocity = Vector2.zero;
+                path.destination = transform.position;
                 isMoving = false;
             }
         }
